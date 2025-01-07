@@ -1,0 +1,18 @@
+To Create a EFS :
+----------------
+
+1) First we need to create a new security group -> choose NFS port and apply it to the servers
+
+2) Go EFS and create a file sys , and after creating 
+
+3) Click on attach and u can find (Using the NFS client) and copy that url
+
+4) Create a new directory in the servers (ex: new)
+
+  (sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-0802e4d5f379899ab.efs.us-east-1.amazonaws.com:/ new/) Replace your directory under new/
+
+5) Now the efs will get mounted to the server 
+
+6) open cat /etc/mtab/ --> copy the last pointer and paste it in (vim /etc/fstab)
+
+7) Now by doing this even if the server gets rebooted the data will not get erased 

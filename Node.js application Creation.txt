@@ -1,0 +1,94 @@
+yum install java -y
+
+yum install docker -y
+
+yum install npm -y ===> To run node.js appliction
+
+mkdir node.js
+
+cd node.js
+
+----------------------
+vim Dockerfile
+
+  FROM node:18
+  WORKDIR /app
+  COPY package*.json ./
+  RUN npm install
+  COPY . .
+  EXPOSE 3000
+  CMD ["node", "app.js"]
+
+----------------------------
+vim app.js
+
+ // Import Express
+ 
+const express = require('express');
+ 
+const app = express();
+ 
+const port = 3000;
+ 
+// Define a route
+ 
+app.get('/', (req, res) => {
+ 
+  res.send('Hello, Node.js!');
+ 
+});
+ 
+// Start the server
+ 
+app.listen(port, () => {
+ 
+  console.log(`Server running at http://localhost:${port}`);
+ 
+});
+
+ --------------------
+
+ vim package.json
+
+{
+
+  "name": "sample-nodejs",
+
+  "version": "1.0.0",
+
+  "main": "index.js",
+
+  "scripts": {
+
+    "test": "echo \"Error: no test specified\" && exit 1"
+
+  },
+
+  "keywords": [],
+
+  "author": "",
+
+  "license": "ISC",
+
+  "description": "",
+
+  "dependencies": {
+
+    "express": "^4.21.1"
+
+  }
+
+}
+
+---------------
+
+npm install express ==> it will create all required dependency	
+
+docker build -t node-app . ==> To build the docker images 
+
+docker run -d -p 3000:3000 --name madhan node-app
+
+
+
+ 
+

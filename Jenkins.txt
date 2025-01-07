@@ -1,0 +1,91 @@
+Ip:8080/env-vars.html/ = It will give u the variables that are available to shell and batch build steps
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+ 
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+ 
+sudo dnf install java-17-amazon-corretto-devel
+ 
+yum install jenkins -y
+
+systemctl daemon-reload
+ 
+systemctl start jenkins
+ 
+systemctl enable  jenkins ==> It will automatically start the jenkins
+ 
+systemctl status jenkins
+ 
+cd /var/lib/jenkins/secrets/
+
+sudo chmod  -R 775 /var/lib/Jenkins/
+
+sudo systemctl restart jenkins
+ 
+ls
+
+
+The agent directive expects one of the following options:
+------------------------------------------------------
+
+-> any
+-> none
+-> label
+-> docker
+-> dockerfile
+-> dockerContainer
+   
+                     
+
+
+Jenkis-file Script :
+------------------
+1) Declarative pipeline script :
+
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'scp target/app.war user@server:/path/to/deploy'
+            }
+        }
+    }
+}
+
+
+
+2) Scripted pipeline script :
+  ---------------------------
+
+node {
+    stage('Build') {
+        sh 'mvn clean package'
+    }
+    stage('Test') {
+        sh 'mvn test'
+    }
+    stage('Deploy') {
+        sh 'scp target/app.war user@server:/path/to/deploy'
+    }
+}
+
+
+
+
+
+
+netstat -lnpt
+netstat -tuln -p - it will shows which port is used by which server 
+
+cat /etc/*release -- It shows which os the server running

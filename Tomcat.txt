@@ -1,0 +1,106 @@
+This is used to create a new user in Tomcat :
+---------------------------------------------
+1) find / -name context.xml
+
+2) open the below file and remove the access for the tomcat that runs on port 127
+
+   nano /home/ec2-user/tomcat/webapps/host-manager/META-INF/context.xml   and
+   nano /home/ec2-user/tomcat/webapps/manager/META-INF/context.xml
+
+3) Open conf -- nono (tomcat-users.xml)
+
+under user add the below lines..
+
+<role rolename="manager-gui"/>
+<role rolename="manager-script"/>
+<role rolename="manager-jmx"/>
+<role rolename="manager-status"/>
+<role rolename="admin-gui"/>
+<user username="admin" password="admin" roles="admin-gui,manager-gui,manager-script,manager-status"/>
+
+
+
+
+
+TO BUILD AND DEPLOY A War APPLICATION USING JENKINS :(FreeStyle)
+----------------------------------------------------
+
+1) Create a Node 
+
+2) Create a Job
+
+3) Create a Job ===> Build steps -->Execute shell
+
+                  wget https://tomcat.apache.org/tomcat-6.0-doc/appdev/sample/sample.war
+                  sudo cp sample.war /home/ec2-user/tomcat/webapps -- It will create a sample.war file in the above directory
+
+
+
+
+
+
+DEPLOYING a War file in tomcat using Jenkins pipeline script :
+-------------------------------------------------------------
+
+pipeline {
+    agent { label 'Node.js' }  // Replace 'your-agent-label' with the actual label of your agent
+
+    environment {
+        TOMCAT_SERVER = 'http://54.235.31.165:8081/'
+        TOMCAT_MANAGER_USER = 'Tomcat-credentials'
+        TOMCAT_MANAGER_PASSWORD = 'Tomcat-credentials'
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                // Checkout code from your version control system (e.g., Git)
+                git branch: 'master', url: 'https://github.com/MadhanPodali/tomcat-war-deploy.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Use Maven to build the project and generate the WAR file
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('Deploy to Tomcat') {
+            steps {
+                script {
+                    def warFile = 'target/sample.war'
+                    def deployUrl = "${env.TOMCAT_SERVER}/manager/text/deploy?path=/sample&update=true"
+
+                    // Deploy the WAR file using curl
+                    sh """
+                        curl -u ${TOMCAT_MANAGER_USER}:${TOMCAT_MANAGER_PASSWORD} \
+                        --upload-file ${warFile} \
+                        ${deployUrl}
+                    """
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Deployment successful!'
+        }
+        failure {
+            echo 'Deployment failed.'
+        }
+    }
+}
+
+
+
+
+1) Here, the sample file will be created in /home/ec2-user/home/ec2-user/workspace/web-pipeline/
+
+2) And we have copy the sample file into /home/ec2-user/tomcat/webapps/
+
+3) And once after moving sample file into webapps it will open in the browser.
+
+
+

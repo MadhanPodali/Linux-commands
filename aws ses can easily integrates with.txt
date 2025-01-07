@@ -1,0 +1,14 @@
+aws ses can easily integrates with amazon cloudwatch , ec2 ,amazon beanstalk, AWS IAM ,AWS lambda , amazon Route53 , SNS ,
+
+62,000 are free for 1 month and if ur app is hosted in aws ses and it sends emails with SES 
+
+Pricing - if ur app is a part of aws ec2 and elastic beanstalk then we are eligible for free tier and 62,000 emails are free for every month
+ Beyond the free tier: $0.10 per 1,000 email and email size is limited to 10 Mb  
+200 emails for 24 hours and 1 mail per second
+
+
+
+vim /etc/ssh/sshd_config
+
+password authentication : No 
+server sshd restart

@@ -1,0 +1,82 @@
+TO CREATE EC2 INSTNACE AND CREATE EBS VOLUMES AND ATTACH IT TO SERVER
+
+      lsblk  
+
+      df -Th
+
+      file -s /dev/xvdk = It doesn't have file system, so it will display as (data) 
+                         
+      file -s /dev/xvda1 = It has file system ,it's a root volume 
+
+      mkfs -t xfs /dev/xvdk = It will create a new file system for the volume 
+                              But, before creating a new file system for the volume check weather the volume consist of file sys or not.
+                              Here, if u create a new file sys for the volume the existing file sys will deleted and data will be erased. 
+
+      mkdir ytvolume  = It will create a new directory to mount  a new volume 
+
+      ls
+
+     mount /dev/xvdk ytvolume/ = Here the new volume will be mounted to the new directory
+
+     df -Th =  To check weather the new volume is mounted or not 
+
+     cat /etc/mtab  = copy the last entry point and paste it in fstab 
+
+     vim /etc/fstab = By doing this even if we reboot the server the volume will be mounted to the server and the data will be safe 
+
+     mount -all
+
+     lsblk
+
+     df -Th
+
+     xfs_growfs -d /home/ec2-user/ytvolume = It will increase the existing volume to the newly updated size . (ex:- 2gb to 4gb)
+
+     umount /dev/xvdk =  To unmount the volume from the server. 
+
+    
+
+
+TO INCREASE THE ROOT VOULUME ADN DISPLY
+
+  yum install xfsprogs
+  
+  sudo growpart /dev/xvda 1
+
+  
+
+
+To create a ec2 instance with cli command :
+-------------------------------------------
+ 
+aws ec2 run-instances --image-id ami-0453ec754f44f9a4a --count 1 --instance-type t2.micro --key-name newkey --security-group-ids sg-077d9c6540f8b4990 --subnet-id subnet-0e694a62a7ebc6112
+
+
+
+CRON-JOB :
+---------
+
+Create a cronjob and execute a shell script every 5mins to create a file , filename = today's date and time
+ 
+ 
+yum install cronie -y
+1) vi script.sh ( create a file with script.sh)
+ 
+#!/bin/bash
+OUTPUT_DIR="/home/ec2-user/crontab"
+FILENAME=$(date +"%Y-%m-%d_%H-%M-%S").txt
+touch "$OUTPUT_DIR/$FILENAME"
+2) crontab -e
+ 
+*/5 * * * * /home/ec2-user/script.sh
+ 
+3) chmod +x script.sh
+ 
+4) sh script.sh
+ 
+5) cd crontab
+ 
+6) ls
+
+
+

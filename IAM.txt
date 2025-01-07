@@ -1,0 +1,71 @@
+
+WHAT IS IAM IN AWS
+
+IAM (Identity and Access Management) is a framework used in cloud computing and IT systems to manage who has access to resources and under what conditions. IAM enables organizations to define roles, control permissions, authenticate users, and manage access policies to protect data and resources.
+
+In AWS (Amazon Web Services), AWS IAM is a service that provides fine-grained access control across AWS resources. It lets you securely manage access to AWS services and resources for your users, groups, and applications. Here’s a deeper look into IAM in AWS:
+
+Key Components of AWS IAM:
+
+Users:
+
+Represents individual users who need access to AWS resources.
+Users have credentials (like passwords and access keys) and can be assigned permissions.
+For example, a developer working on a project might be given a user account in IAM with specific permissions.
+Groups:
+
+Collections of users with similar access needs.
+Permissions applied to groups apply to all users within that group, simplifying access management.
+For example, you could create groups for “Developers” and “Admins,” each with different access rights.
+
+Roles:
+
+Roles are used to delegate permissions to entities such as users, applications, or services without using long-term credentials (passwords).
+Roles can be assigned to AWS services like EC2 or Lambda to allow them to access other resources securely.
+For instance, an EC2 instance could assume a role to access an S3 bucket without needing a user access key.
+
+Policies:
+
+Policies define permissions for IAM users, groups, and roles.
+Policies are JSON documents that specify which actions are allowed or denied on AWS resources.
+There are two types of policies: Managed Policies (AWS managed or customer managed) and Inline Policies.
+Policies use the JSON format with statements that specify actions, resources, and conditions (if needed).
+
+Permissions Boundaries:
+
+Define the maximum permissions that an IAM entity (user or role) can have.
+Useful in complex environments where you want to limit certain permissions, regardless of assigned policies.
+
+Access Keys:
+
+Provide a way for users and applications to make programmatic requests to AWS resources.
+Each access key has an Access Key ID and a Secret Access Key.
+
+
+Authentication: 
+      is about confirming who you are. It’s like logging in to AWS with a username and password, or using a temporary token to prove your identity. AWS Identity and Access Management (IAM) handles this, checking if you’re a valid user, app, or service.
+
+Authorization:
+      is about what you’re allowed to do once you’re logged in. It uses permissions, called policies, to control what resources you can access and what actions you can perform. For example, a policy might allow you to read files in an S3 bucket but not delete them.
+
+In short:
+
+Authentication: Who are you?
+Authorization: What can you do?
+
+---------------------
+
+DIFFERENCE B/W OBJECT STORAGE AND BLOCK STORAGE
+
+Object Storage:
+
+Stores data as whole objects (like a file or image), along with some extra information (metadata).
+Great for storing large files like videos, photos, and backups.
+It’s simple to scale, and you access the data through a web interface or API.
+Example: Amazon S3 (used for storing files on the cloud).
+
+Block Storage:
+
+Stores data in smaller chunks (blocks), like pieces of a hard drive.
+Best for applications that need fast access to specific pieces of data, like databases or virtual machines.
+It’s like a traditional hard drive that you can attach and format for use.

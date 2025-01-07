@@ -1,0 +1,153 @@
+git config --global user.name "Madhan Podali"
+
+git config --global user.email " "
+
+git add (file name);git commit -m "" = To add and commit the file in single line
+
+git branch -D (branch name)  = To delete a particular branch
+
+git ls-files = It shows the files that are present in stagging area
+
+git rm (file name) =  It will remove the particular file from both working dir and staging area
+
+git rm -r .    = It will remove all the files in both working dir and staging area
+
+git rm --cached (file name) = To remove the file only from staged 
+
+git rm -r --cached . = To remove files from staging are and not in working dir
+
+rm (file-name) = To delete the file 
+
+git remote remove origin = To remove the existining origin in the local repo
+
+git status = To know the difference between workspace and staging 
+
+git add (file-name) = To add a single file to staging
+
+git add -a = To add all the files to staging 
+
+git init = start tracking a project with Git
+
+git log = To get the logs (in one line add --oneline to logs)
+
+git commit -m "first commit" = To commit the file from staging to local repository
+
+git push  = To push the files from local repository to remote repository
+
+git branch -M main 
+
+git remote add origin https://github.com/MadhanPodali/hello-from-hit.git = Path of the repository
+
+git push -u origin main = It will login us to the git-hub from cmd
+
+git diff = To know the difference between files
+
+git diff HEAD (file name ) = To know the difference between workig Dic and last commit          
+
+git diff commit id & (file name) = To know the difference between the working dir and specific commit ==> to get commit id = (git log --oneline)
+
+git remote -v = To the clone url 
+
+git branch = To list all the brance in local repo
+
+git branch -r = To list all the branches in remote repo
+
+git checkout --(file name) = it will discard unstaged changes in the tracked files of working dir & it will applicable only for tracked files 
+
+git checkout -b (branch name) = To create a new branch and checkout into new branch 
+
+git checkout (branch name)/ git switch (branch name) = To switch from one branch to another branch
+
+git clone url  = To clone the existing repo to ur local repo
+
+git branch -r  = To list the remort branches
+
+git branch -all = To list the all the branches 
+
+git pull = combo of git fetch and git merge 
+
+git branch -M main/master = To change the name as per the repo in remote and local 
+
+gir merge(branch name) = To merge the two branches
+
+git branch --mereged  = It shows the merged branches 
+
+gir branch --no-merged = It shows all the un-merged branches
+
+
+git pull = It will pull all the files to local repo that are the present in the remote repo
+
+git fetch = To get the changes from remote repo to local repo and it will not get updted 
+
+git merge = To merege the files that are fetched from the remote repo
+
+
+git show commit-id = To show the changes in single commit
+
+git log --oneline --stat --all = To check what changes have been done in each of the commit
+
+git log --oneline --stat --all --patch = To check what changes have been done in each of the commit along with the changes
+
+
+vscode.dev/GitHub(url) = To open the particular repository in the VS Code
+
+
+STAH:
+-----
+git add.
+git stah
+git stah list
+git stah pop
+git stah clear
+
+
+
+
+git init
+git status
+git commit -m
+git branch -M main
+git pull origin main
+
+
+fix ,fixes ,fixed             = These are the keywords to close the issue automatically in commit
+close ,closes ,closed
+resolve ,resolves ,resolved
+
+
+
+
+
+
+
+git diff = To know the difference between files
+-----------------------------------------
+diff --git a/new.txt b/new.txt
+index b77b811..f53a72c 100644
+--- a/new.txt
++++ b/new.txt
+@@ -1,2 +1,5 @@
+ Hi this is madhan
+ Hi it consist of animls
++
++hello world
++hi hello
+
+
+a/new.txt  --> represents source (staging area)
+b/new.txt  --> represents destination(working dir)
+
+b77b811   ---> Hash of file content from source/staging
+f53a72c   ---> Hash of file content from destination/working
+
+100644    ---> git file mode
+    100   ---> reperesents type of the file 
+    644   ---> File permisiion  (6=rw, 4=r, 4=r)
+
+--- a/new.txt --> Source file missing some lines (staging)
++++ b/new.txt --> New lines are added in destination file(Working dir)
+
+
+ Hi this is madhan ---> if any line prefixed with space means it is unchanged
++hello world ---> if any line prefixed with + means it is added in destination copy.
+ if any line prefixed with - means it is removed from destination copy.

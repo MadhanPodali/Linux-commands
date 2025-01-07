@@ -1,0 +1,287 @@
+ipconfig = To list all the IP address in windows
+
+ifconfig = To list all the TP address in Linus
+
+curl ifconfig.me - To know the host IP  
+
+ docker stats   - To the information about the resources used by the conatiner
+
+docker run -d -p --name image name
+
+VOLUME COMMANDS -- default location for docker volumes = /var/lib/docker/volume/
+--------------
+
+docker run -v my_volume:/data my_container - Attaching a Volume to a Container
+
+docker run --rm -v mkvol:/data alpine ls /data - To find the data present in the volume
+
+docker volume prune - delete all the volumes that are left out in the docker
+
+docker exec -it (contain id) bash -  exec = execution , -it = interactive terminal 
+                                          to get access or to enter into the running docker  container
+
+docker build(path) -t  - it will build a  image from a dockerfile
+-t or --tag  - sets a name and optionally a tag
+
+docker run -v my-volume:/app-data:ro ubuntu - To prevent containers from modifying the volume
+
+
+docker start (volume),docker attach (volume)- to list the data present in volumes 
+
+
+CONTAINERS COMMANDS:
+--------------------
+
+docker container run -d --name abc ubuntu tail -f /dev/null - It is used when the container goes to exited state 
+
+docker run -d --name abc --cpus=1.5 nginx - To create a container with limited ( CPU ) usage
+
+docker run -d --name abc --cpus=2 -v (volume-name):  /path/in/container : rw  nginx =  To create a container with limited ( CPU ) and (VOLUME) usage
+
+docker run -it --volumes-from xyz --name Hi ubuntu bin/bash - It is used to share the volume from one container to another container
+
+docker run -it --name=xyz -v madhanvol:/data ubuntu - To attach a existing volume to the new container
+ 
+docker run -it --name=Hi --mount source=mkvol,destination=/data ubuntu = To attach a existing volume to the new container
+ 
+docker rm $(docker ps -a -q) - to remove all the containers 
+
+docker run -d --name mk ubuntu tail -f /dev/null- to run the ubuntu images into the container
+
+
+   always      = docker run --name abc --restart always alpine sleep 10
+
+unless-stopped = docker run --name xyz --restart unless-stopped alpine sleep 10
+
+on failure     = docker run --name hi --restart on-failure alpine sleep 10
+
+
+
+
+docker images -to list the images 
+
+docker ps     - to list the containers
+
+docker pull(image name):tag(version) - to download the image 
+
+docker push(image name):tag(version) - to upload the image
+
+docker run(image name) - to run the image and creates a container for that image
+
+docker run -d or --detach(image name) - Runs container in background and prints the container ID
+
+docker logs(container id) - views logs from service running inside the container
+
+docker stop(container id) - to stop the container
+
+docker run -d -p(image name):tag - publish a container's port to host
+
+docker run -d -p 8080:80 (image name):tag -to run in our local machine
+
+docker ps -a or --all -Lists all containers(stopped or started)
+
+docker start (container) - to start a specific container
+
+docker run --name - assign a name to the container
+
+
+  docker info - it gives the system information
+
+  attach      Attach local standard input, output, and error streams to a running container
+
+  commit      Create a new image from a container's changes
+
+  cp          Copy files/folders between a container and the local filesystem
+
+  create      Create a new container
+
+  diff        Inspect changes to files or directories on a container's filesystem
+
+  events      Get real time events from the server
+
+  export      Export a container's filesystem as a tar archive
+
+  history     Show the history of an image
+
+  import      Import the contents from a tarball to create a filesystem image
+
+  inspect     Return low-level information on Docker objects
+
+  kill        Kill one or more running containers
+
+  load        Load an image from a tar archive or STDIN
+ 
+  logs        Fetch the logs of a container
+
+  pause       Pause all processes within one or more containers
+
+  port        List port mappings or a specific mapping for the container
+
+  rename      Rename a container
+
+  restart     Restart one or more containers
+
+  rm          Remove one or more containers
+
+  rmi         Remove one or more images
+
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+
+  start       Start one or more stopped containers
+
+  stats       Display a live stream of container(s) resource usage statistics
+
+  stop        Stop one or more running containers
+
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+
+  top         Display the running processes of a container
+
+  unpause     Unpause all processes within one or more containers
+
+  update      Update configuration of one or more containers
+	
+  wait        Block until one or more containers stop, then print their exit codes
+
+
+
+DOCKER_COMPOSE COMMANDS :
+------------------------
+ docker-compose up        = Start all services defined in docker-compose.yml
+
+ docker-compose down      = Stop and clean up containers, networks, and volumes
+
+ docker-compose stop      = Stop services without removing them 
+
+ docker-compose restart   = Restart all services
+
+ docker-compose build     = Build images for all services
+
+ docker-compose pull      = Pull the latest versions of all service images
+
+ docker-compose down --volumes = Stop services and remove associated volumes
+
+ docker-compose build --no-cache   = Rebuild images without using cache
+
+ docker-compose config --services  = List all services defined in the Compose file
+
+ docker-compose logs <service_name> = Show logs for a specific service
+
+ docker-compose exec <service_name> <command>  = Execute a command inside a running service container
+
+ docker-compose up --scale <service_name>=<count>  = Scale a specific service to multiple instances
+
+
+
+
+
+
+
+
+
+ 
+  
+
+
+
+
+
+
+
+
+
+
+HERE ONLY 1 SERVER CAN RUN ON SINGLE PORT
+
+
+TO INSTALL DOCKER IN EC2 INSTANCE
+---------------------------------
+   1- sudo yum update -y
+   2- sudo yum install docker -y
+   3- 	
+   4- 	
+   5- sudo usermod -aG docker $USER
+   6- docker --version
+
+
+
+TO CREATE A DOCKER FILE AND TO DEPLOY A SAMPLE WAR/JAR FILE AS A DOCKER CONTAINER
+---------------------------------------------------------------------------------
+First we need to add 8080 port in security group to get access for the Dockerfile.
+
+   1 copy the file from tomcat and paste it in server wget https://tomcat.apache.org/tomcat-6.0-doc/appdev/sample/sample.war
+
+   2  sudo vi Dockerfile
+
+  -->this should be pasted in this vi Dockerfile
+
+# Use the official Tomcat image as the base image
+FROM tomcat:9.0-jdk11
+
+# Remove the default webapps in Tomcat
+RUN rm -rf /usr/local/tomcat/webapps/*
+
+# Copy the sample WAR file to the webapps directory
+COPY sample.war /usr/local/tomcat/webapps/ROOT.war
+
+# Expose port 8080
+EXPOSE 8080
+
+# Start Tomcat server
+CMD ["catalina.sh", "run"]
+
+
+3 sudo docker build -t sample-war-app .
+4 sudo docker run -p 8080:8080 sample-war-app
+
+
+
+
+
+Create 2 docker networks. And launch an ubuntu container in both the networks with different names.
+Then see if you can ping one another using container IP, not the host IP.(from one container to another)
+
+
+
+docker network create network1
+docker network create network2
+
+docker run -dit --name container1 --network network1 ubuntu
+docker network connect --alias alias-container1 network2 container1
+
+docker run -dit --name container2 --network network2 ubuntu
+docker network connect --alias alias-container2 network1 container2
+
+docker inspect container1
+docker inspect container2                                                                 TO INSTLL PING
+                                                                                          -------------- 
+docker exec -it container1 bash                                                           apt update
+                                                                                          apt install -y iputils-ping 
+ping -(docker inspect network1 and take the container2-IP  and enter it)                  ping --version
+
+  
+exit
+
+docker exec -it container2 bash
+
+ping -(docker inspect network2 and take the container1-IP  and enter it)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,174 @@
+Networking commands :
+---------------------
+Public IP --> It is unique across the globe || Websites and services can see your public IP when you access them
+
+Private IP --> It is unique across the VPC itself . And there is possibility to have same private IP in other VPC's || Devices outside your network can't see private IP's
+
+mtr google.com --> It will show the number of hops between the local server(our server)  and destination server(google)
+                   yum install mtr -y
+
+telnet(other server IP) (Port 22) --> It is used to check the connection between servers  ||  yum install telnet 
+
+ping --> When ever if the server doesn't work for ping we need to add (custom ICMP -IPV4) (ALL) in the security group .
+
+ss -lt --> It is used to check the TCP sockets in the server
+
+
+
+
+
+
+
+
+1) LS → To list the content in directory
+
+2) pwd -> Print working directory
+
+3) cd → change the directory.
+
+4) mkdir → create a new directory with given name.
+
+5) touch → create empty files
+
+6) Cat → Display the content of a tile
+
+7) Cat>filename → create a new file and write the content and (Ctv/+D) to save the content in file.
+
+8) Cat file1 file2>file 3 → create new file and content
+
+9) CP → copy a file or directory of both files will be copied to new file.
+
+10) mv → moves a file or directory.
+
+11) head(file name) → To display (or) read, first 10 lines of a file. || head -n (no of lines to display) (file name) -- It will the display from top the number of lines u enter here
+
+12) tail(file name) → To display (or) read, last 10 lines of a tile.  || tail -n (no of lines to display) (file name) -- It will the display from bottom the number of lines u enter here
+
+13) tac → Display file content in reverse order.
+
+14) clear → To clear the screen.
+
+15) rm (directory)/* → To remove all the files in directory without removing the directory
+
+16) rmdir → To remove the specific directory ||  rm -rf  --> To remove directory forcefully
+
+17) vim → To get access into the file To enter data in the file
+
+          esc o --> To get the access between the existing lines 
+          esc k --> It will movie the cursor  up  
+          esc j --> It will movie the cursor down 
+         esc 2g --> The cursor will go the specific line (ex : we gave entered 2 here we can give any number the cursor will directly go there)	
+         esc dw --> It will delete word by word in the line
+         esc dd --> It will delete the entire line where the cursor is places
+ esc set number --> It will set the number for the lines that are present in the file || (set nonumber) --> To delete the numbers	
+esc 2 dd --> It will delete 2 lines under the cursor , we can any enter number of lines it will delete all those lines that are under the cursor 
+
+
+
+18) more → similar to cat and here we can display large content by using ENTER, SPACEBAR.
+
+19) id →> Display id of user.
+
+20) grep → filter to search the given Pattern (word) in the fill content (Ctrl C) to exit
+
+21) ﻿﻿﻿﻿diff → compares the content of too different files
+
+22) ﻿﻿﻿﻿Ping → check the connectivity status of server.
+
+23) ﻿﻿﻿﻿history → Review all the commands which you have entered
+
+23) host name → Display host name
+
+24) uniq → Remove duplicates of file content / it can remove only continuous duplicates.
+
+25) ﻿﻿﻿﻿uname → Linux command to get basic into of os || (uname -a) --> It will give more details
+
+26) ﻿﻿﻿﻿Ls*-txt → list all the files with given extension
+
+27) ﻿﻿﻿﻿df → display into about total space and available 
+
+28) ﻿﻿﻿﻿du-›allows user to gain disk usage into quickly.
+
+29) ﻿﻿﻿﻿nano -> It is used to edit text files directly from the command line.
+
+30) ﻿﻿﻿﻿ssh → To establish a secure connection b/w a local device and remote server over an insecure nw.
+
+31) ﻿﻿﻿chmod (777) → It will give u the read ,write ,and execute permission for(user), (group), (others) of that file 
+
+    chmod (400) -> It will give u only read permission for the (user) and for (group) and (others) u won't have any permission
+    
+    chowm (user):(group)(file name) --> It will change the owner of the particular file 
+ 
+32) ﻿﻿﻿﻿man →It shows the manual for better understanding of any command, (It gives the details at command)
+
+33) ﻿﻿﻿﻿nano -Ctrl K→ to cut the line || ctrl u -> to undo the line || ctrl -I -> To starting point of the line  || ctrl -E -> to edit
+
+34) ﻿﻿﻿﻿cat/etc/Passwd -> to all the users in Linux
+
+35) ﻿﻿﻿﻿Passwd -> to create a Password for new user.
+
+36) sudo userdel username -> to delete the user in Linux. sudo userdel -r usemane, sudo userdel + username
+
+37) cronie -> to install cron Job in your server (yum install cronie)
+
+38) lsblK -> to list the volumes
+
+39) df -Th -> It shows the amount of disk spall available on tile sys.
+
+40) mkfs -> To write a file sys .
+
+41) mount -> In linux it is used to make a file sys accessible to the operating sys.
+
+42) ﻿﻿﻿﻿/etc/mtab -> In Linux it is a system file that maintains a list of currently mounted files.
+
+43) ﻿﻿﻿﻿fstab - It is used configure file that defines the file sys to be automatically mounted
+
+44) ﻿﻿﻿﻿/etc - The /etc directory in Linux is a sys directory that contains all the configuration files and settings of system 
+
+
+
+
+
+
+
+  w / who --> It will show how many users are connected to the server
+
+  top  --> It will show the CPU utilization
+ 
+  free -h --> It will the memory status
+
+  yum history --> It will display the history of the tasks that are performed 
+
+  yum history info 4 --> It will display the info more in detail of that particular task
+
+  yum history undo 1 --> To undo the particular task  
+
+
+
+
+1) Ctrl l --> It will clear the entire screen
+
+2) whoami --> It will show the present user 
+
+3) touch .(filename) --> It will create a file and it will hide the file
+        To hide anything keep (.) in front of it 
+
+4) ls path --> it will list the content of that particular path without entering into that path
+
+4)yum install unzip -y --> To unzip a file || unzip (file name) = It will unzip the files
+
+5) find / -name (filename) --> This will give u the entire path of that particular file where it is located 
+
+6) pr (file name) --> It will print the particular file, it gives file name , no.of pages 
+
+7) usermod -s /sbin/nologin (username) --> It will not give access to the user to login
+
+8) usermod -s /bin/bash (username) --> It will give access to the user to login
+
+9) usermod -L (username) --> It will lock the user || usermod -U (username)
+
+10) groupadd (groupname ) --> To create a new group 
+
+11) usermod -aG (groupname) --> It will add that particular group to that user
+
+12) 
